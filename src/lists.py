@@ -1,7 +1,8 @@
 """Singly-linked lists."""
 
 from __future__ import annotations
-from typing import Generic, TypeVar, Optional
+
+from typing import Generic, Optional, TypeVar
 
 T = TypeVar('T')  # Generic type variable
 
@@ -36,8 +37,16 @@ def length(x: LList[T]) -> int:
     >>> length(Link(1, Link(2, None)))
     2
     """
+    if x is None:
+        return 0
+    if x.tail == None:
+        return 1
+    else:
+        return 1 + length(x.tail)
+
     ...
 
+#print(length(Link(1, Link(2, Link(3,None)))))
 
 def drop(x: LList[T], k: int) -> LList[T]:
     """
@@ -52,7 +61,18 @@ def drop(x: LList[T], k: int) -> LList[T]:
     >>> drop(Link(1, Link(2, None)), 1)
     Link(2, None)
     """
+    if length(x) < k:
+        return x
+    if k == 0:
+        return x
+    if x is None:
+        return None
+    else:
+        return drop(x.tail,k-1)
+
     ...
+
+#print(drop(Link(1, None), 1) is None)
 
 
 def take(x: LList[T], k: int) -> LList[T]:
@@ -69,8 +89,18 @@ def take(x: LList[T], k: int) -> LList[T]:
     >>> take(Link(1, Link(2, Link(3, None))), 2)
     Link(1, Link(2, None))
     """
+
+    #if length(x) < k:
+    #    return x
+    if k == 0:
+        return None
+    if x is None:
+        return None
+    else:
+        return Link(x.head, take(x.tail, k-1))
     ...
 
+#print(take(Link(1, Link(2, Link(3, None))), 2))
 
 def reverse(x: LList[T]) -> LList[T]:
     """
@@ -87,4 +117,21 @@ def reverse(x: LList[T]) -> LList[T]:
     >>> reverse(Link(1, Link(2, Link(3, None))))
     Link(3, Link(2, Link(1, None)))
     """
+
+    if x is None:
+        return None
+    else: 
+        return Link(reverse(x.tail), x.head)
     ...
+
+#print(reverse(Link(1, None)))
+
+def copy(x: LList[T]) -> LList[T]:
+    
+
+    if x is None:
+        return None
+    else: 
+        return Link(x.head, copy(x.tail))
+
+print(copy(Link(1, None)))
