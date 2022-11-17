@@ -120,11 +120,12 @@ def reverse(x: LList[T]) -> LList[T]:
 
     if x is None:
         return None
-    else: 
-        return Link(reverse(x.tail), x.head)
+    if x.tail == None:
+        return x
+    return Link(reverse(x.tail), x.head)
     ...
 
-#print(reverse(Link(1, None)))
+print(reverse(Link(1, None)))
 
 def copy(x: LList[T]) -> LList[T]:
     
@@ -134,4 +135,4 @@ def copy(x: LList[T]) -> LList[T]:
     else: 
         return Link(x.head, copy(x.tail))
 
-print(copy(Link(1, None)))
+#print(copy(Link(1, None)))
