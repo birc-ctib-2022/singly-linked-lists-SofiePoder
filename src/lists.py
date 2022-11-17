@@ -117,15 +117,13 @@ def reverse(x: LList[T]) -> LList[T]:
     >>> reverse(Link(1, Link(2, Link(3, None))))
     Link(3, Link(2, Link(1, None)))
     """
+    rev = None
+    while x: 
+        rev = Link(x.head, rev)
+        x = x.tail
+    return rev
 
-    if x is None:
-        return None
-    if x.tail == None:
-        return x
-    return Link(reverse(x.tail), x.head)
-    ...
-
-print(reverse(Link(1, None)))
+print(reverse(Link(1, Link(2, Link(3, None)))))
 
 def copy(x: LList[T]) -> LList[T]:
     
